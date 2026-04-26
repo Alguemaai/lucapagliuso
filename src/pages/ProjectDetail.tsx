@@ -4,6 +4,7 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { projects } from "@/data/portfolio";
 import diabloCase from "@/data/cases/diablo";
+import mustelaCase from "@/data/cases/mustela";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -19,13 +20,14 @@ const fadeUp = {
 // Map of slug → rich case data. Add more as cases ship.
 const caseRegistry = {
   "diablo-ii-resurrected": diabloCase,
+  "mustela-from-birth": mustelaCase,
 } as const;
 
 const ProjectDetail = () => {
   const { slug = "" } = useParams();
   const navigate = useNavigate();
   const meta = projects.find((p) => p.slug === slug);
-  const data = (caseRegistry as Record<string, typeof diabloCase>)[slug];
+  const data = (caseRegistry as Record<string, any>)[slug];
 
   if (!meta || !data) {
     return (
@@ -136,6 +138,25 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* CAMPAIGN FILM (optional) */}
+      {data.videoEmbed && (
+        <section className="edge py-24 md:py-32">
+          <p className="label text-accent mb-6">Campaign Film</p>
+          <h2 className="display text-[clamp(36px,5vw,68px)] mb-12">
+            The <span className="display-italic">launch spot</span>.
+          </h2>
+          <div className="relative w-full aspect-video bg-surface-1 border border-hairline overflow-hidden">
+            <iframe
+              src={data.videoEmbed}
+              title="Campaign film"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        </section>
+      )}
+
       {/* BRIEF */}
       <section className="edge py-24 md:py-32">
         <p className="label text-accent mb-6">The Challenge</p>
@@ -206,10 +227,15 @@ const ProjectDetail = () => {
 
       {/* MARKET STATS */}
       <section className="edge py-24 md:py-32 mt-24 border-t border-hairline">
-        <p className="label text-accent mb-6">Market Understanding</p>
-        <h2 className="display text-[clamp(36px,5vw,68px)] mb-16">
-          Gamer media <span className="display-italic">consumption</span>.
-        </h2>
+        <p className="label text-accent mb-6">{(data as any).marketEyebrow ?? "Market Understanding"}</p>
+        <h2
+          className="display text-[clamp(36px,5vw,68px)] mb-16"
+          dangerouslySetInnerHTML={{
+            __html:
+              (data as any).marketHeading ??
+              `Gamer media <span class="display-italic">consumption</span>.`,
+          }}
+        />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {data.market.map((m, i) => (
             <motion.div
@@ -220,9 +246,10 @@ const ProjectDetail = () => {
               transition={{ duration: 0.6, delay: i * 0.06, ease: easeOutExpo }}
               className="border-t-2 border-accent pt-8"
             >
-              <p className="display display-italic text-5xl md:text-6xl tabular-nums">
-                {m.value}
-              </p>
+              <p
+                className="display display-italic text-5xl md:text-6xl tabular-nums"
+                dangerouslySetInnerHTML={{ __html: m.value }}
+              />
               <p
                 className="font-mono text-[12px] text-muted-foreground mt-3 leading-[1.6]"
                 dangerouslySetInnerHTML={{ __html: m.label }}
@@ -268,19 +295,22 @@ const ProjectDetail = () => {
             <h2 className="display text-[clamp(36px,5vw,68px)] mb-8">
               Budget of
               <br />
-              <span className="display-italic text-accent">$90,000 USD</span>
+              <span className="display-italic text-accent">
+                {(data as any).budgetTotal ?? "$90,000 USD"}
+              </span>
             </h2>
             <p className="font-mono text-[14px] leading-[1.8] text-foreground/70">
-              Strategic split between Brazil and SSA LATAM, with heavier weight
-              on video platforms to maximize awareness during launch.
+              {(data as any).budgetIntro ??
+                "Strategic split between Brazil and SSA LATAM, with heavier weight on video platforms to maximize awareness during launch."}
             </p>
-            <div className="mt-8 pt-8 border-t border-hairline font-mono text-[13px] leading-[1.85] text-foreground/65">
-              Geographic split: <span className="text-foreground">50% Brazil</span>{" "}
-              · <span className="text-foreground">50% SSA</span>
-              <br />
-              Video-first allocation — YouTube + TikTok + Twitch lead the mix on
-              VTR and engagement with the gamer audience.
-            </div>
+            <div
+              className="mt-8 pt-8 border-t border-hairline font-mono text-[13px] leading-[1.85] text-foreground/65"
+              dangerouslySetInnerHTML={{
+                __html:
+                  (data as any).budgetNote ??
+                  `Geographic split: <span class="text-foreground">50% Brazil</span> · <span class="text-foreground">50% SSA</span><br/>Video-first allocation — YouTube + TikTok + Twitch lead the mix on VTR and engagement with the gamer audience.`,
+              }}
+            />
           </div>
 
           <div className="flex flex-col gap-6">
