@@ -27,7 +27,7 @@ const ProjectDetail = () => {
   const { slug = "" } = useParams();
   const navigate = useNavigate();
   const meta = projects.find((p) => p.slug === slug);
-  const data = (caseRegistry as Record<string, typeof diabloCase>)[slug];
+  const data = (caseRegistry as Record<string, any>)[slug];
 
   if (!meta || !data) {
     return (
