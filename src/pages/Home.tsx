@@ -28,16 +28,15 @@ const Home = () => {
       <section className="relative h-[100svh] min-h-[680px] overflow-hidden">
         <img
           src={heroPortrait}
-          alt="Portrait of Luca Pagliuso"
-          width={1280}
-          height={1920}
-          className="absolute inset-0 h-full w-full object-cover object-[35%_30%] opacity-90"
+          alt="São Paulo skyline — Luca Pagliuso"
+          width={1920}
+          height={1280}
+          className="absolute inset-0 h-full w-full object-cover object-[center_45%] [filter:grayscale(1)_contrast(1.05)_brightness(0.85)]"
         />
-        {/* Vignette overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-transparent" />
-
+        {/* Vignette overlays — keep the cinematic dark mood */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/30 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(var(--background)/0.7)_100%)]" />
         {/* Side meta */}
         <div className="absolute left-6 top-1/2 -translate-y-1/2 -rotate-90 origin-left whitespace-nowrap">
           <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-foreground/35">
