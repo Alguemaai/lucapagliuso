@@ -5,7 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import Clock from "@/components/Clock";
 import { capabilities, numbers, projects } from "@/data/portfolio";
-import { useLanguage, pick } from "@/i18n/LanguageContext";
+import { useLanguage, pick, pickText } from "@/i18n/LanguageContext";
 import { ui } from "@/i18n/translations";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;

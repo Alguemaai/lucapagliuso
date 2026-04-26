@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { projects, type Project } from "@/data/portfolio";
-import { useLanguage, pick } from "@/i18n/LanguageContext";
+import { useLanguage, pick, pickText } from "@/i18n/LanguageContext";
 import { ui } from "@/i18n/translations";
 import { cn } from "@/lib/utils";
 

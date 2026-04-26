@@ -5,7 +5,7 @@ import SiteFooter from "@/components/SiteFooter";
 import { projects } from "@/data/portfolio";
 import diabloCaseRaw from "@/data/cases/diablo";
 import mustelaCaseRaw from "@/data/cases/mustela";
-import { useLanguage, pick } from "@/i18n/LanguageContext";
+import { useLanguage, pick, pickText } from "@/i18n/LanguageContext";
 import { ui } from "@/i18n/translations";
 import { localizeCase } from "@/i18n/localizeCase";
 
