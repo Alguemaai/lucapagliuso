@@ -243,7 +243,7 @@ const Home = () => {
               transition={{ duration: 0.8, delay: i * 0.06, ease: easeOutExpo }}
             >
               <Link
-                to={`/projects?case=${p.slug}`}
+                to={p.hasDetail ? `/projects/${p.slug}` : `/projects?case=${p.slug}`}
                 className="block group bg-background hover:bg-surface-1 transition-colors duration-500"
               >
                 <div className="grid grid-cols-12 gap-6 items-center py-10 md:py-14">
