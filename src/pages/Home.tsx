@@ -5,6 +5,8 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import Clock from "@/components/Clock";
 import { capabilities, numbers, projects } from "@/data/portfolio";
+import { useLanguage, pick } from "@/i18n/LanguageContext";
+import { ui } from "@/i18n/translations";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -18,7 +20,9 @@ const fadeUp = {
 };
 
 const Home = () => {
+  const { lang } = useLanguage();
   const featured = projects.slice(0, 4);
+  const T = ui.home;
 
   return (
     <div className="grain min-h-screen bg-background text-foreground">
@@ -33,33 +37,27 @@ const Home = () => {
           height={1280}
           className="absolute inset-0 h-full w-full object-cover object-[center_45%] [filter:grayscale(1)_contrast(1.05)_brightness(0.85)]"
         />
-        {/* Vignette overlays — keep the cinematic dark mood */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/30 to-background" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/40" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(var(--background)/0.7)_100%)]" />
-        {/* Side meta */}
         <div className="absolute left-6 top-1/2 -translate-y-1/2 -rotate-90 origin-left whitespace-nowrap">
           <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-foreground/35">
-            Portfolio · Vol. 02 · MMXXV
+            {pick(T.sideMeta, lang)}
           </span>
         </div>
 
-        {/* Top meta row */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeUp}
           className="absolute top-28 right-6 md:right-14 max-w-[280px] text-right"
         >
-          <p className="label mb-3 text-foreground/45">Index № 01</p>
+          <p className="label mb-3 text-foreground/45">{pick(T.indexLabel, lang)}</p>
           <p className="font-mono text-[12px] leading-relaxed text-foreground/55">
-            Growth analyst with four years scaling performance for{" "}
-            <span className="text-foreground/90">AMBEV, JBS, Blizzard</span> and
-            independent studios across LATAM.
+            {pick(T.intro, lang)}
           </p>
         </motion.div>
 
-        {/* Headline */}
         <div className="absolute inset-x-0 bottom-0 edge pb-10 md:pb-16">
           <motion.h1
             initial="hidden"
@@ -80,12 +78,12 @@ const Home = () => {
             className="mt-6 flex flex-col md:flex-row items-start md:items-end justify-between gap-4"
           >
             <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-foreground/55 max-w-md">
-              Growth Analyst — media planning, experimentation & analytics for brands that need numbers, not narratives.
+              {pick(T.tagline, lang)}
             </p>
             <div className="flex items-center gap-6">
               <Clock />
               <Link to="/projects" className="label link-underline text-foreground">
-                See the work →
+                {pick(T.seeWork, lang)}
               </Link>
             </div>
           </motion.div>
@@ -98,18 +96,8 @@ const Home = () => {
           {Array.from({ length: 2 }).map((_, repeat) => (
             <div key={repeat} className="flex items-center gap-16 pr-16">
               {[
-                "AMBEV",
-                "✶",
-                "Blizzard",
-                "✶",
-                "JBS",
-                "✶",
-                "GS1 Brasil",
-                "✶",
-                "Pilar Imóveis",
-                "✶",
-                "Greenz",
-                "✶",
+                "AMBEV", "✶", "Blizzard", "✶", "JBS", "✶",
+                "GS1 Brasil", "✶", "Pilar Imóveis", "✶", "Greenz", "✶",
               ].map((w, i) => (
                 <span
                   key={`${repeat}-${i}`}
@@ -127,7 +115,7 @@ const Home = () => {
       <section id="about" className="edge py-24 md:py-40">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-3">
-            <p className="label">(01) Manifesto</p>
+            <p className="label">{pick(T.manifestoEyebrow, lang)}</p>
           </div>
           <motion.div
             initial="hidden"
@@ -137,22 +125,15 @@ const Home = () => {
             className="col-span-12 md:col-span-9 max-w-4xl"
           >
             <h2 className="display text-[clamp(36px,6vw,86px)]">
-              I turn raw data into{" "}
-              <span className="display-italic">decisions</span> — not dashboards
-              that nobody opens.
+              {lang === "pt" ? (
+                <>Transformo dados brutos em <span className="display-italic">decisões</span> — não em dashboards que ninguém abre.</>
+              ) : (
+                <>I turn raw data into <span className="display-italic">decisions</span> — not dashboards that nobody opens.</>
+              )}
             </h2>
             <div className="mt-12 grid md:grid-cols-2 gap-8 font-mono text-[14px] leading-[1.8] text-foreground/70">
-              <p>
-                Four years scaling performance for AMBEV, JBS, GS1 Brasil and
-                Blizzard — managing R$1MM+ annual budgets across Google, Meta,
-                LinkedIn and Amazon Ads.
-              </p>
-              <p>
-                I build hypotheses, run tests, and obsess over CAC and LTV. The
-                difference is in translating numbers into business moves —
-                MBA in Data Science & Analytics from{" "}
-                <span className="text-foreground">USP/Esalq</span>.
-              </p>
+              <p>{pick(T.manifestoP1, lang)}</p>
+              <p>{pick(T.manifestoP2, lang)}</p>
             </div>
           </motion.div>
         </div>
@@ -163,17 +144,15 @@ const Home = () => {
         <div className="grid grid-cols-2 md:grid-cols-4">
           {numbers.map((n, i) => (
             <motion.div
-              key={n.label}
+              key={pick(n.label, lang)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.06, ease: easeOutExpo }}
               className="edge py-12 md:py-16 border-r last:border-r-0 [&:nth-child(2)]:border-r-0 md:[&:nth-child(2)]:border-r border-hairline"
             >
-              <p className="display text-5xl md:text-6xl tabular-nums">
-                {n.value}
-              </p>
-              <p className="label mt-3">{n.label}</p>
+              <p className="display text-5xl md:text-6xl tabular-nums">{n.value}</p>
+              <p className="label mt-3">{pick(n.label, lang)}</p>
             </motion.div>
           ))}
         </div>
@@ -183,18 +162,18 @@ const Home = () => {
       <section id="capabilities" className="edge py-24 md:py-40">
         <div className="flex items-baseline justify-between mb-16">
           <div>
-            <p className="label mb-4">(02) Capabilities</p>
+            <p className="label mb-4">{pick(T.capabilitiesEyebrow, lang)}</p>
             <h2 className="display text-[clamp(36px,6vw,86px)]">
-              What I <span className="display-italic">do</span>.
+              {pick(T.capabilitiesTitle, lang)} <span className="display-italic">{pick(T.capabilitiesItalic, lang)}</span>.
             </h2>
           </div>
-          <span className="hidden md:inline label">06 disciplines</span>
+          <span className="hidden md:inline label">{pick(T.capabilitiesCount, lang)}</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-hairline">
           {capabilities.map((c, i) => (
             <motion.div
-              key={c.title}
+              key={pick(c.title, lang)}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
@@ -209,9 +188,9 @@ const Home = () => {
                   →
                 </span>
               </div>
-              <h3 className="display text-3xl mb-5">{c.title}</h3>
+              <h3 className="display text-3xl mb-5">{pick(c.title, lang)}</h3>
               <p className="font-mono text-[13px] leading-[1.8] text-foreground/65">
-                {c.body}
+                {pick(c.body, lang)}
               </p>
             </motion.div>
           ))}
@@ -222,13 +201,13 @@ const Home = () => {
       <section id="work" className="edge pt-24 md:pt-40 border-t border-hairline">
         <div className="flex items-baseline justify-between mb-16">
           <div>
-            <p className="label mb-4">(03) Selected Work</p>
+            <p className="label mb-4">{pick(T.workEyebrow, lang)}</p>
             <h2 className="display text-[clamp(36px,6vw,86px)]">
-              Recent <span className="display-italic">cases</span>.
+              {pick(T.workTitle, lang)} <span className="display-italic">{pick(T.workItalic, lang)}</span>.
             </h2>
           </div>
           <Link to="/projects" className="hidden md:inline label link-underline text-foreground">
-            All work →
+            {pick(T.allWork, lang)}
           </Link>
         </div>
 
@@ -254,11 +233,11 @@ const Home = () => {
                   <div className="col-span-10 md:col-span-5">
                     <p className="label mb-3">{p.client}</p>
                     <h3 className="display text-3xl md:text-5xl group-hover:translate-x-2 transition-transform duration-500 ease-out-expo">
-                      {p.title}
+                      {pick(p.title, lang)}
                     </h3>
                   </div>
                   <div className="hidden md:flex md:col-span-4 gap-2 flex-wrap">
-                    {p.tags.map((t) => (
+                    {pick(p.tags, lang).map((t) => (
                       <span
                         key={t}
                         className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground border border-hairline px-2.5 py-1"
@@ -284,7 +263,7 @@ const Home = () => {
             to="/projects"
             className="font-mono text-[11px] tracking-[0.22em] uppercase border border-hairline px-8 py-4 hover:bg-foreground hover:text-background transition-all duration-500 ease-out-expo"
           >
-            View all projects →
+            {pick(T.viewAll, lang)}
           </Link>
         </div>
       </section>
@@ -293,11 +272,11 @@ const Home = () => {
       <section id="contact" className="edge py-24 md:py-40 border-t border-hairline">
         <div className="grid grid-cols-12 gap-8 items-end">
           <div className="col-span-12 md:col-span-8">
-            <p className="label mb-6">(04) Let's talk</p>
+            <p className="label mb-6">{pick(T.contactEyebrow, lang)}</p>
             <h2 className="display text-[clamp(48px,9vw,160px)]">
-              Let's <span className="display-italic">grow</span>
+              {pick(T.contactTitle, lang)} <span className="display-italic">{pick(T.contactItalic, lang)}</span>
               <br />
-              something.
+              {pick(T.contactSuffix, lang)}
             </h2>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right">
