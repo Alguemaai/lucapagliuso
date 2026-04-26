@@ -274,19 +274,22 @@ const ProjectDetail = () => {
             <h2 className="display text-[clamp(36px,5vw,68px)] mb-8">
               Budget of
               <br />
-              <span className="display-italic text-accent">$90,000 USD</span>
+              <span className="display-italic text-accent">
+                {(data as any).budgetTotal ?? "$90,000 USD"}
+              </span>
             </h2>
             <p className="font-mono text-[14px] leading-[1.8] text-foreground/70">
-              Strategic split between Brazil and SSA LATAM, with heavier weight
-              on video platforms to maximize awareness during launch.
+              {(data as any).budgetIntro ??
+                "Strategic split between Brazil and SSA LATAM, with heavier weight on video platforms to maximize awareness during launch."}
             </p>
-            <div className="mt-8 pt-8 border-t border-hairline font-mono text-[13px] leading-[1.85] text-foreground/65">
-              Geographic split: <span className="text-foreground">50% Brazil</span>{" "}
-              · <span className="text-foreground">50% SSA</span>
-              <br />
-              Video-first allocation — YouTube + TikTok + Twitch lead the mix on
-              VTR and engagement with the gamer audience.
-            </div>
+            <div
+              className="mt-8 pt-8 border-t border-hairline font-mono text-[13px] leading-[1.85] text-foreground/65"
+              dangerouslySetInnerHTML={{
+                __html:
+                  (data as any).budgetNote ??
+                  `Geographic split: <span class="text-foreground">50% Brazil</span> · <span class="text-foreground">50% SSA</span><br/>Video-first allocation — YouTube + TikTok + Twitch lead the mix on VTR and engagement with the gamer audience.`,
+              }}
+            />
           </div>
 
           <div className="flex flex-col gap-6">
