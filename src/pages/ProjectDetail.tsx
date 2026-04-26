@@ -4,6 +4,7 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { projects } from "@/data/portfolio";
 import diabloCase from "@/data/cases/diablo";
+import mustelaCase from "@/data/cases/mustela";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -19,6 +20,7 @@ const fadeUp = {
 // Map of slug → rich case data. Add more as cases ship.
 const caseRegistry = {
   "diablo-ii-resurrected": diabloCase,
+  "mustela-from-birth": mustelaCase,
 } as const;
 
 const ProjectDetail = () => {
