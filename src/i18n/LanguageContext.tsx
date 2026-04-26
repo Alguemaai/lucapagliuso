@@ -29,7 +29,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     setLangState(l);
     try {
       localStorage.setItem(STORAGE_KEY, l);
-    } catch {}
+    } catch (error) {
+      void error;
+    }
   }, []);
 
   const toggle = useCallback(() => setLang(lang === "pt" ? "en" : "pt"), [lang, setLang]);
