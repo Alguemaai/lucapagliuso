@@ -107,7 +107,7 @@ export const projects: Project[] = [
   },
   {
     slug: "amazon-ads-roas",
-    index: "04",
+    index: "05",
     client: "Confidential E-commerce",
     title: "Amazon Ads · +69% ROAS",
     category: "Paid Media",
@@ -129,7 +129,7 @@ export const projects: Project[] = [
   },
   {
     slug: "jbs-data-pipeline",
-    index: "05",
+    index: "06",
     client: "JBS",
     title: "Marketing Data Pipeline",
     category: "Analytics",
@@ -151,7 +151,7 @@ export const projects: Project[] = [
   },
   {
     slug: "gs1-linkedin",
-    index: "06",
+    index: "07",
     client: "GS1 Brasil",
     title: "B2B LinkedIn Engine",
     category: "Growth",
