@@ -3,7 +3,10 @@ import { motion } from "framer-motion";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { projects } from "@/data/portfolio";
-import bossaCase from "@/data/cases/bossa";
+import bossaCaseRaw from "@/data/cases/bossa";
+import { useLanguage, pick } from "@/i18n/LanguageContext";
+import { ui } from "@/i18n/translations";
+import { localizeCase } from "@/i18n/localizeCase";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -20,20 +23,23 @@ const SLUG = "bossa-nova-sothebys";
 
 const BossaCasePage = () => {
   const navigate = useNavigate();
+  const { lang } = useLanguage();
+  const T = ui.bossa;
+  const Td = ui.detail;
   const meta = projects.find((p) => p.slug === SLUG);
-  const data = bossaCase;
+  const data = localizeCase(bossaCaseRaw as Record<string, unknown>, lang) as any;
 
   if (!meta) {
     return (
       <div className="grain min-h-screen bg-background text-foreground">
         <SiteNav />
         <section className="edge pt-56 pb-32">
-          <p className="label mb-6">404 · Case not found</p>
+          <p className="label mb-6">{pick(Td.notFound, lang)}</p>
           <button
             onClick={() => navigate("/projects")}
             className="mt-12 font-mono text-[11px] tracking-[0.22em] uppercase border border-hairline px-8 py-4 hover:bg-foreground hover:text-background transition-all duration-500"
           >
-            ← Back to all work
+            {pick(Td.back, lang)}
           </button>
         </section>
         <SiteFooter />
@@ -43,6 +49,7 @@ const BossaCasePage = () => {
 
   const idx = projects.findIndex((p) => p.slug === SLUG);
   const next = projects[(idx + 1) % projects.length];
+  const tags = pick(meta.tags, lang);
 
   return (
     <div className="grain min-h-screen bg-background text-foreground">
@@ -73,8 +80,8 @@ const BossaCasePage = () => {
             variants={fadeUp}
             className="label mb-5 text-foreground/55"
           >
-            Case · {meta.index} <span className="text-accent mx-2">·</span>{" "}
-            {meta.tags.join(" · ")}
+            {pick(Td.case, lang)} · {meta.index} <span className="text-accent mx-2">·</span>{" "}
+            {tags.join(" · ")}
           </motion.p>
           <motion.h1
             initial="hidden"
@@ -95,7 +102,7 @@ const BossaCasePage = () => {
             custom={2}
             className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 max-w-4xl"
           >
-            {data.heroMeta.map((m) => (
+            {data.heroMeta.map((m: { label: string; value: string }) => (
               <div key={m.label}>
                 <p className="label text-foreground/40 mb-2">{m.label}</p>
                 <p className="font-mono text-[13px] text-foreground/85">{m.value}</p>
@@ -108,7 +115,7 @@ const BossaCasePage = () => {
       {/* BIG NUMBERS */}
       <section className="border-y border-hairline bg-surface-1">
         <div className="grid grid-cols-2 md:grid-cols-4">
-          {data.bigNumbers.map((n, i) => (
+          {data.bigNumbers.map((n: { label: string; value: string }, i: number) => (
             <motion.div
               key={n.label}
               initial={{ opacity: 0, y: 16 }}
@@ -117,9 +124,7 @@ const BossaCasePage = () => {
               transition={{ duration: 0.6, delay: i * 0.05, ease: easeOutExpo }}
               className="group relative px-8 py-10 md:py-12 border-r last:border-r-0 border-hairline"
             >
-              <p className="display display-italic text-4xl md:text-5xl tabular-nums">
-                {n.value}
-              </p>
+              <p className="display display-italic text-4xl md:text-5xl tabular-nums">{n.value}</p>
               <p className="label mt-3">{n.label}</p>
               <span className="absolute bottom-0 left-8 h-px w-0 bg-accent transition-all duration-500 ease-out-expo group-hover:w-8" />
             </motion.div>
@@ -129,10 +134,11 @@ const BossaCasePage = () => {
 
       {/* INTRO */}
       <section className="edge py-24 md:py-32">
-        <p className="label text-accent mb-6">The Brief</p>
+        <p className="label text-accent mb-6">{pick(T.brief, lang)}</p>
         <h2 className="display text-[clamp(36px,5vw,68px)] max-w-5xl leading-[1.05]">
-          A scroll-native asset system for a{" "}
-          <span className="display-italic">luxury real-estate</span> brand.
+          {pick(T.briefTitle, lang)}{" "}
+          <span className="display-italic">{pick(T.briefItalic, lang)}</span>
+          {pick(T.briefSuffix, lang)}
         </h2>
         <p className="font-mono text-[15px] leading-[1.85] text-foreground/70 max-w-3xl mt-10">
           {data.intro}
@@ -142,14 +148,14 @@ const BossaCasePage = () => {
       {/* GALLERY */}
       <section className="edge pb-24 md:pb-32">
         <div className="flex items-baseline justify-between mb-10">
-          <p className="label text-accent">Selected Carousels</p>
+          <p className="label text-accent">{pick(T.selected, lang)}</p>
           <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-muted-foreground tabular-nums">
             {data.gallery.length.toString().padStart(2, "0")} / {data.gallery.length.toString().padStart(2, "0")}
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {data.gallery.map((g, i) => (
+          {data.gallery.map((g: { src: string; label: string; caption: string }, i: number) => (
             <motion.figure
               key={g.label}
               initial={{ opacity: 0, y: 24 }}
@@ -181,9 +187,10 @@ const BossaCasePage = () => {
 
       {/* VIDEO */}
       <section className="edge pb-24 md:pb-32">
-        <p className="label text-accent mb-6">Reel · Listing Walkthrough</p>
+        <p className="label text-accent mb-6">{pick(T.reel, lang)}</p>
         <h2 className="display text-[clamp(36px,5vw,68px)] mb-12">
-          A property told in <span className="display-italic">9:16</span>.
+          {pick(T.reelTitle, lang)}{" "}
+          <span className="display-italic">{pick(T.reelItalic, lang)}</span>.
         </h2>
         <div className="mx-auto w-full max-w-md aspect-[9/16] bg-surface-1 border border-hairline overflow-hidden">
           <video
@@ -198,12 +205,13 @@ const BossaCasePage = () => {
 
       {/* PILLARS */}
       <section className="bg-surface-1 border-y border-hairline edge py-24 md:py-32">
-        <p className="label text-accent mb-6">Design Pillars</p>
+        <p className="label text-accent mb-6">{pick(T.pillars, lang)}</p>
         <h2 className="display text-[clamp(36px,5vw,68px)] mb-16">
-          How the system <span className="display-italic">holds together</span>.
+          {pick(T.pillarsTitle, lang)}{" "}
+          <span className="display-italic">{pick(T.pillarsItalic, lang)}</span>.
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-hairline">
-          {data.pillars.map((p, i) => (
+          {data.pillars.map((p: { label: string; body: string }, i: number) => (
             <motion.div
               key={p.label}
               initial={{ opacity: 0, y: 18 }}
@@ -213,9 +221,7 @@ const BossaCasePage = () => {
               className="bg-background p-10 md:p-12"
             >
               <p className="label text-accent mb-5">0{i + 1} · {p.label}</p>
-              <p className="font-mono text-[14px] leading-[1.85] text-foreground/70">
-                {p.body}
-              </p>
+              <p className="font-mono text-[14px] leading-[1.85] text-foreground/70">{p.body}</p>
             </motion.div>
           ))}
         </div>
@@ -225,21 +231,19 @@ const BossaCasePage = () => {
       <section className="border-t border-hairline edge py-16 md:py-20">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <p className="label mb-3">Next case</p>
+            <p className="label mb-3">{pick(Td.nextCase, lang)}</p>
             <Link
-              to={
-                next.hasDetail ? `/projects/${next.slug}` : `/projects?case=${next.slug}`
-              }
+              to={next.hasDetail ? `/projects/${next.slug}` : `/projects?case=${next.slug}`}
               className="display text-[clamp(36px,5vw,68px)] link-underline"
             >
-              {next.title} <span className="display-italic">↗</span>
+              {pick(next.title, lang)} <span className="display-italic">↗</span>
             </Link>
           </div>
           <Link
             to="/projects"
             className="font-mono text-[11px] tracking-[0.22em] uppercase border border-hairline px-8 py-4 hover:bg-foreground hover:text-background transition-all duration-500"
           >
-            ← All projects
+            {pick(Td.allProjects, lang)}
           </Link>
         </div>
       </section>
