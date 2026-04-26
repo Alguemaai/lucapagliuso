@@ -5,7 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import Clock from "@/components/Clock";
 import { capabilities, numbers, projects } from "@/data/portfolio";
-import { useLanguage, pick } from "@/i18n/LanguageContext";
+import { useLanguage, pick, pickText } from "@/i18n/LanguageContext";
 import { ui } from "@/i18n/translations";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
@@ -231,7 +231,7 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="col-span-10 md:col-span-5">
-                    <p className="label mb-3">{p.client}</p>
+                    <p className="label mb-3">{pickText(p.client, lang)}</p>
                     <h3 className="display text-3xl md:text-5xl group-hover:translate-x-2 transition-transform duration-500 ease-out-expo">
                       {pick(p.title, lang)}
                     </h3>

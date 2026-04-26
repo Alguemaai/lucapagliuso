@@ -4,7 +4,7 @@ export type BiArr = { pt: string[]; en: string[] };
 export type Project = {
   slug: string;
   index: string;
-  client: string;
+  client: string | Bi;
   title: Bi;
   category: "Paid Media" | "Growth" | "Analytics" | "Brand";
   year: string;
@@ -199,7 +199,7 @@ export const projects: Project[] = [
   {
     slug: "amazon-ads-roas",
     index: "06",
-    client: { pt: "E-commerce Confidencial", en: "Confidential E-commerce" } as unknown as string,
+    client: { pt: "E-commerce Confidencial", en: "Confidential E-commerce" },
     title: { pt: "Amazon Ads · +69% ROAS", en: "Amazon Ads · +69% ROAS" },
     category: "Paid Media",
     year: "2024",

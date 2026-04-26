@@ -29,7 +29,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     setLangState(l);
     try {
       localStorage.setItem(STORAGE_KEY, l);
-    } catch {}
+    } catch (error) {
+      void error;
+    }
   }, []);
 
   const toggle = useCallback(() => setLang(lang === "pt" ? "en" : "pt"), [lang, setLang]);
@@ -47,3 +49,7 @@ export const useLanguage = () => {
 
 /** Helper: pick a value from a bilingual object */
 export const pick = <T,>(obj: { pt: T; en: T }, lang: Lang): T => obj[lang];
+
+/** Helper: render values that can be either plain strings or bilingual objects */
+export const pickText = (value: string | { pt: string; en: string }, lang: Lang): string =>
+  typeof value === "string" ? value : value[lang];
