@@ -11,6 +11,7 @@ export type Project = {
   description: string[];
   role: string;
   stack: string[];
+  hasDetail?: boolean;
 };
 
 export const projects: Project[] = [
@@ -35,6 +36,7 @@ export const projects: Project[] = [
     ],
     role: "Lead Media Planner",
     stack: ["Google Ads", "Meta Ads", "DV360", "Looker Studio"],
+    hasDetail: true,
   },
   {
     slug: "pilar-imoveis",
