@@ -206,10 +206,15 @@ const ProjectDetail = () => {
 
       {/* MARKET STATS */}
       <section className="edge py-24 md:py-32 mt-24 border-t border-hairline">
-        <p className="label text-accent mb-6">Market Understanding</p>
-        <h2 className="display text-[clamp(36px,5vw,68px)] mb-16">
-          Gamer media <span className="display-italic">consumption</span>.
-        </h2>
+        <p className="label text-accent mb-6">{(data as any).marketEyebrow ?? "Market Understanding"}</p>
+        <h2
+          className="display text-[clamp(36px,5vw,68px)] mb-16"
+          dangerouslySetInnerHTML={{
+            __html:
+              (data as any).marketHeading ??
+              `Gamer media <span class="display-italic">consumption</span>.`,
+          }}
+        />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {data.market.map((m, i) => (
             <motion.div
@@ -220,9 +225,10 @@ const ProjectDetail = () => {
               transition={{ duration: 0.6, delay: i * 0.06, ease: easeOutExpo }}
               className="border-t-2 border-accent pt-8"
             >
-              <p className="display display-italic text-5xl md:text-6xl tabular-nums">
-                {m.value}
-              </p>
+              <p
+                className="display display-italic text-5xl md:text-6xl tabular-nums"
+                dangerouslySetInnerHTML={{ __html: m.value }}
+              />
               <p
                 className="font-mono text-[12px] text-muted-foreground mt-3 leading-[1.6]"
                 dangerouslySetInnerHTML={{ __html: m.label }}
