@@ -138,6 +138,25 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* CAMPAIGN FILM (optional) */}
+      {data.videoEmbed && (
+        <section className="edge py-24 md:py-32">
+          <p className="label text-accent mb-6">Campaign Film</p>
+          <h2 className="display text-[clamp(36px,5vw,68px)] mb-12">
+            The <span className="display-italic">launch spot</span>.
+          </h2>
+          <div className="relative w-full aspect-video bg-surface-1 border border-hairline overflow-hidden">
+            <iframe
+              src={data.videoEmbed}
+              title="Campaign film"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        </section>
+      )}
+
       {/* BRIEF */}
       <section className="edge py-24 md:py-32">
         <p className="label text-accent mb-6">The Challenge</p>
