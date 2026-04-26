@@ -120,6 +120,13 @@ const mustelaCase = {
     { platform: "TikTok Ads", pct: 14, amount: "R$ 84,000" },
     { platform: "Pinterest Ads", pct: 12, amount: "R$ 72,000" },
   ],
+  marketEyebrow: "Strategic Framework",
+  marketHeading: `BDI / CDI <span class="display-italic">opportunity map</span>.`,
+  budgetTotal: "R$ 600,000",
+  budgetIntro:
+    "Allocation engineered around the BDI/CDI study — concentrating spend in regions where the baby-skincare category was already developed but Mustela's brand presence was under-indexed.",
+  budgetNote: `Funnel split: <span class="text-foreground">CTV + YouTube</span> for top-funnel reach · <span class="text-foreground">Meta + TikTok</span> for mid-funnel storytelling · <span class="text-foreground">Pinterest</span> for high-intent maternity discovery.<br/>Campaign film: <a href="https://youtu.be/uxZJBpuNxWQ" target="_blank" rel="noreferrer" class="text-foreground underline-offset-4 hover:underline">Watch on YouTube ↗</a>`,
+  videoEmbed: "https://www.youtube.com/embed/uxZJBpuNxWQ",
 };
 
 export default mustelaCase;
