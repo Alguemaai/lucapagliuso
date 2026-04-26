@@ -104,7 +104,7 @@ const ProjectsPage = () => {
                     </span>
                     <div className="col-span-10 md:col-span-5">
                       <div className="flex items-center gap-3 mb-2">
-                        <p className="label">{p.client}</p>
+                        <p className="label">{pickText(p.client, lang)}</p>
                         {p.hasDetail && (
                           <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-accent border border-accent/40 px-2 py-0.5">
                             {pick(T.fullCase, lang)}
@@ -211,7 +211,7 @@ const ProjectsPage = () => {
               </div>
 
               <div className="px-8 md:px-12 py-12">
-                <p className="label mb-4">{active.client} · {active.year}</p>
+                <p className="label mb-4">{pickText(active.client, lang)} · {active.year}</p>
                 <h2 className="display text-[clamp(40px,6vw,80px)]">
                   {pick(active.title, lang)}
                 </h2>

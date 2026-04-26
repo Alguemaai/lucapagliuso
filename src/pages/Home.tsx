@@ -231,7 +231,7 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="col-span-10 md:col-span-5">
-                    <p className="label mb-3">{p.client}</p>
+                    <p className="label mb-3">{pickText(p.client, lang)}</p>
                     <h3 className="display text-3xl md:text-5xl group-hover:translate-x-2 transition-transform duration-500 ease-out-expo">
                       {pick(p.title, lang)}
                     </h3>
