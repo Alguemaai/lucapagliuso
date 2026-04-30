@@ -11,8 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "predeploy": "npm run build && cp dist/index.html dist?404.html && cp",
-    "deploy": "gh-page -d dist"
+    "predeploy": "npm run build",
+    "deploy": "copy dist\\index.html dist\\404.html && gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
