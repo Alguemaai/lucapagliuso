@@ -261,10 +261,10 @@ const ProjectsPage = () => {
                 <div className="mt-14 pt-10 border-t border-hairline">
                   <p className="label mb-3">{pick(T.modalCta, lang)}</p>
                   <a
-                    href="mailto:lucapagliuso50@gmail.com"
+                    href="mailto:lucapagliuso@hotmail.com"
                     className="font-display text-2xl md:text-3xl link-underline"
                   >
-                    lucapagliuso50@gmail.com →
+                    lucapagliuso@hotmail.com →
                   </a>
                 </div>
               </div>

@@ -16,10 +16,10 @@ const SiteFooter = () => {
             {pick(T.availableSuffix, lang)}
           </h3>
           <a
-            href="mailto:lucapagliuso50@gmail.com"
+            href="mailto:lucapagliuso@hotmail.com"
             className="inline-block mt-8 font-display text-xl md:text-2xl link-underline"
           >
-            lucapagliuso50@gmail.com
+            lucapagliuso@hotmail.com
           </a>
         </div>
 
@@ -35,7 +35,7 @@ const SiteFooter = () => {
                 className="link-underline text-foreground/80 hover:text-foreground">Upwork ↗</a>
             </li>
             <li>
-              <a href="mailto:lucapagliuso50@gmail.com"
+              <a href="mailto:lucapagliuso@hotmail.com"
                 className="link-underline text-foreground/80 hover:text-foreground">Email ↗</a>
             </li>
           </ul>

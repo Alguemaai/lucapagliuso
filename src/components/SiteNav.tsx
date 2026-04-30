@@ -6,12 +6,17 @@ import { ui } from "@/i18n/translations";
 import LangToggle from "@/components/LangToggle";
 
 const Logo = () => (
-  <svg width="28" height="28" viewBox="0 0 34 34" aria-hidden>
-    <rect x="0" y="0" width="34" height="34" fill="hsl(var(--foreground))" />
-    <rect x="0" y="0" width="17" height="34" fill="hsl(var(--background))" />
-    <text x="8.5" y="23" fontFamily="JetBrains Mono, monospace" fontWeight="700" fontSize="13" fill="hsl(var(--foreground))" textAnchor="middle">L</text>
-    <text x="25.5" y="23" fontFamily="JetBrains Mono, monospace" fontWeight="700" fontSize="13" fill="hsl(var(--background))" textAnchor="middle">P</text>
-  </svg>
+  <span className="flex items-baseline gap-2 leading-none">
+    <span aria-hidden className="text-[22px] md:text-[26px] text-[#C8A96E] leading-none">✦</span>
+    <span className="flex flex-col leading-none">
+      <span className="font-display italic font-light text-[20px] md:text-[24px] text-foreground leading-none">
+        Luca Pagliuso
+      </span>
+      <span className="font-mono text-[8px] md:text-[9px] tracking-[0.25em] uppercase text-foreground/30 mt-1">
+        Growth Analyst
+      </span>
+    </span>
+  </span>
 );
 
 const SiteNav = () => {
@@ -36,11 +41,8 @@ const SiteNav = () => {
       )}
     >
       <div className="flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center group" aria-label="Luca Pagliuso — Growth Analyst">
           <Logo />
-          <span className="font-mono text-[11px] tracking-[0.22em] uppercase font-bold">
-            Luca Pagliuso
-          </span>
         </Link>
 
         <nav className="flex items-center gap-5 md:gap-8">
@@ -65,7 +67,7 @@ const SiteNav = () => {
             {pick(ui.nav.work, lang)}
           </Link>
           <a
-            href="mailto:lucapagliuso50@gmail.com"
+            href="mailto:lucapagliuso@hotmail.com"
             className="hidden sm:inline label link-underline text-muted-foreground hover:text-foreground transition-colors duration-300"
           >
             {pick(ui.nav.contact, lang)}

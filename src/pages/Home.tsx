@@ -7,6 +7,7 @@ import Clock from "@/components/Clock";
 import { capabilities, numbers, projects } from "@/data/portfolio";
 import { useLanguage, pick, pickText } from "@/i18n/LanguageContext";
 import { ui } from "@/i18n/translations";
+import ContactBlock from "@/components/ContactBlock";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -269,44 +270,7 @@ const Home = () => {
       </section>
 
       {/* ── CONTACT ─────────────────────────────────────────── */}
-      <section id="contact" className="edge py-24 md:py-40 border-t border-hairline">
-        <div className="grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 md:col-span-8">
-            <p className="label mb-6">{pick(T.contactEyebrow, lang)}</p>
-            <h2 className="display text-[clamp(48px,9vw,160px)]">
-              {pick(T.contactTitle, lang)} <span className="display-italic">{pick(T.contactItalic, lang)}</span>
-              <br />
-              {pick(T.contactSuffix, lang)}
-            </h2>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:text-right">
-            <a
-              href="mailto:lucapagliuso50@gmail.com"
-              className="font-display text-2xl md:text-3xl link-underline"
-            >
-              lucapagliuso50@gmail.com
-            </a>
-            <div className="flex md:justify-end gap-6 mt-8">
-              <a
-                href="https://linkedin.com/in/luca-pagliuso"
-                target="_blank"
-                rel="noreferrer"
-                className="label link-underline hover:text-foreground"
-              >
-                LinkedIn ↗
-              </a>
-              <a
-                href="https://www.upwork.com"
-                target="_blank"
-                rel="noreferrer"
-                className="label link-underline hover:text-foreground"
-              >
-                Upwork ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactBlock />
 
       <SiteFooter />
     </div>
